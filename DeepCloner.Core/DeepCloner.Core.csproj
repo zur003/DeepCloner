@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net462;net6.0;net7.0;net8.0</TargetFrameworks>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <LangVersion>12</LangVersion>
+  </PropertyGroup>
+  
+  <PropertyGroup>
+    <Title>DeepCloner.Core</Title>
+    <Description>A library for cloning objects, ported from DeepCloner.</Description>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    
+    <Authors>Adrian Mos</Authors>
+    <Company />
+    <Product>IX Libraries</Product>
+    <Copyright>Adrian Mos, 2024</Copyright>
+    <PackageProjectUrl>https://github.com/adimosh/IX.Libraries/</PackageProjectUrl>
+    <NeutralLanguage>en</NeutralLanguage>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+  </PropertyGroup>
+  
+  <PropertyGroup Condition="'$(TargetFramework)'=='net462'">
+    <DefineConstants>$(DefineConstants);OLDFRAMEWORK</DefineConstants>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="JetBrains.Annotations" Version="2023.3.0" />
+  </ItemGroup>
+
+</Project>
