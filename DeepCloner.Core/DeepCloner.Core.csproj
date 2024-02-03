@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFrameworks>net462;net6.0;net7.0;net8.0</TargetFrameworks>
@@ -8,6 +8,8 @@
   </PropertyGroup>
   
   <PropertyGroup>
+    <Version>0.1.0</Version>
+
     <Title>DeepCloner.Core</Title>
     <Description>A library for cloning objects, ported from DeepCloner.</Description>
     <PackageReadmeFile>README.md</PackageReadmeFile>
