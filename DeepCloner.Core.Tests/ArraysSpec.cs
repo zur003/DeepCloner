@@ -81,6 +81,8 @@ public class ArraysSpec
         }
 
         public int X { get; set; }
+
+        public Guid Q { get; } = Guid.NewGuid();
     }
 
     [Test]
@@ -91,8 +93,8 @@ public class ArraysSpec
         Assert.That(cloned.Length, Is.EqualTo(2));
         Assert.That(cloned[0].X, Is.EqualTo(1));
         Assert.That(cloned[1].X, Is.EqualTo(2));
-        Assert.That(cloned[0], Is.Not.EqualTo(arr[0]));
-        Assert.That(cloned[1], Is.Not.EqualTo(arr[1]));
+        Assert.That(ReferenceEquals(cloned[0], arr[0]), Is.Not.True);
+        Assert.That(ReferenceEquals(cloned[1], arr[1]), Is.Not.True);
     }
 
     public struct S1
@@ -128,8 +130,8 @@ public class ArraysSpec
         Assert.That(cloned.Length, Is.EqualTo(2));
         Assert.That(cloned[0].C.X, Is.EqualTo(1));
         Assert.That(cloned[1].C.X, Is.EqualTo(2));
-        Assert.That(cloned[0].C, Is.Not.EqualTo(arr[0].C));
-        Assert.That(cloned[1].C, Is.Not.EqualTo(arr[1].C));
+        Assert.That(ReferenceEquals(cloned[0].C, arr[0].C), Is.Not.True);
+        Assert.That(ReferenceEquals(cloned[1].C, arr[1].C), Is.Not.True);
     }
 
     [Test]
@@ -278,8 +280,8 @@ public class ArraysSpec
         var clone = arr.DeepClone();
         Assert.That(clone[0, 0], Is.Not.Null);
         Assert.That(clone[1, 1], Is.Not.Null);
-        Assert.That(clone[1, 1], Is.EqualTo(clone[0, 0]));
-        Assert.That(clone[1, 1], Is.Not.EqualTo(arr[0, 0]));
+        Assert.That(ReferenceEquals(clone[1, 1], clone[0, 0]));
+        Assert.That(ReferenceEquals(clone[1, 1], arr[0, 0]), Is.Not.True);
     }
 
     [Test]
@@ -381,8 +383,6 @@ public class ArraysSpec
         Assert.That(StringComparer.OrdinalIgnoreCase == StringComparer.OrdinalIgnoreCase.DeepClone(), Is.True);
         Assert.That(StringComparer.InvariantCulture == StringComparer.InvariantCulture.DeepClone(), Is.True);
         Assert.That(StringComparer.InvariantCultureIgnoreCase == StringComparer.InvariantCultureIgnoreCase.DeepClone(), Is.True);
-        Assert.That(StringComparer.CurrentCulture == StringComparer.CurrentCulture.DeepClone(), Is.True);
-        Assert.That(StringComparer.CurrentCultureIgnoreCase == StringComparer.CurrentCultureIgnoreCase.DeepClone(), Is.True);
     }
 
     private void Check_Comparer_does_not_Clone_Internal<T>()

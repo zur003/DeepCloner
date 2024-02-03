@@ -36,9 +36,6 @@ internal static class DeepClonerSafeTypes
         [typeof(DBNull)] = true,
         [StringComparer.Ordinal.GetType()] = true,
         [StringComparer.OrdinalIgnoreCase.GetType()] = true,
-        //[StringComparer.CurrentCulture.GetType()] = true, // Can be same as StringComparer.Ordinal, will be added later
-        //[Type.GetType("System.RuntimeType")] = true, // Will be dded later due to it possibly being null
-        //[Type.GetType("System.RuntimeTypeHandle")] = true, // Will be dded later due to it possibly being null
     };
 
     static DeepClonerSafeTypes()
@@ -49,8 +46,6 @@ internal static class DeepClonerSafeTypes
             {
                 Type.GetType("System.RuntimeType"),
                 Type.GetType("System.RuntimeTypeHandle"),
-                StringComparer.CurrentCulture.GetType(),
-                StringComparer.CurrentCultureIgnoreCase.GetType(),
                 StringComparer.InvariantCulture.GetType(),
                 StringComparer.InvariantCultureIgnoreCase.GetType(),
             }) KnownTypes.TryAdd(x, true);
