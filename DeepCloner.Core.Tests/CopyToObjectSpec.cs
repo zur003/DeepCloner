@@ -263,7 +263,7 @@ public class CopyToObjectSpec
 #pragma warning restore NUnit2021 // Incompatible types for EqualTo constraint
         Assert.That(arrTo[0], Is.EqualTo(arrTo[1]));
         Assert.That(arrTo[1], Is.EqualTo(arrTo[2]));
-        Assert.That(arrTo[2].A, Is.Not.EqualTo(c1));
+        Assert.That(ReferenceEquals(arrTo[2].A, c1), Is.Not.True);
         Assert.That(arrTo[2].A, Is.EqualTo(arrTo[2].B));
         Assert.That(arrTo[3], Is.Null);
     }
