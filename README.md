@@ -1,3 +1,14 @@
+This repository is a fork of [DeepCloner.Core](https://github.com/adimosh/DeepCloner) which is in turn a fork of 
+[DeepCloner](https://github.com/force-net/DeepCloner/). It differs from DeepCloner.Core only in that fields tagged with 
+the "NonSerialized" attribute are not cloned, but are initialized to the default value for their type (usually either 0 
+or null). This modification was made because a common technique for performing deep clones in .Net has been to use 
+BinaryFormatter to serialize and deserialize an object. However, Microsoft has deprecated the use of BinaryFormatter, 
+and is expected to remove it completely in the release of .NET 9 at the end of 2024. This fork was developed specifically 
+for use by the [ApsimInitiative](https://github.com/APSIMInitiative), which historically has employed BinaryFormetter for 
+object cloning, but with reliance on the use of "NonSerialized" tags to prevent specific sub-fields from being included 
+in the cloning process.
+
+
 # DeepCloner.Core
 
 Library with extenstion to clone objects for .NET. It can deep or shallow copy objects. In deep cloning all object graph is maintained. Library actively uses code-generation in runtime as result object cloning is blazingly fast.
