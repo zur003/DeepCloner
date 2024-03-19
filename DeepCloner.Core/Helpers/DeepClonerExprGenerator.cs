@@ -120,10 +120,9 @@ internal static class DeepClonerExprGenerator
 
         foreach (var fieldInfo in fi)
         {
-            if (fieldInfo.GetCustomAttribute(typeof(NonSerializedAttribute), false) != null)
+            if (FieldIsSuppressed(fieldInfo))
             {
-                // Treat the "NonSerialized" Attribute as "don't clone".
-                // Instead, set the field to its default value (which will usually be "null" for
+                // Don't clone; instead set the field to its default value (which will usually be "null" for
                 // non-value types).
                 expressionList.Add(Expression.Assign(Expression.Field(toLocal, fieldInfo), Expression.Default(fieldInfo.FieldType)));
             }
@@ -171,6 +170,19 @@ internal static class DeepClonerExprGenerator
         blockParams.Add(toLocal);
 
         return Expression.Lambda(funcType, Expression.Block(blockParams, expressionList), from, state).Compile();
+    }
+
+    private static bool FieldIsSuppressed(FieldInfo fieldInfo)
+    {
+        if (DeepClonerGenerator.SuppressedAttributeTypes != null)
+        {
+            foreach (Type attrType in DeepClonerGenerator.SuppressedAttributeTypes)
+            {
+                if (fieldInfo.GetCustomAttribute(attrType, false) != null)
+                    return true;
+            }
+        }
+        return false;
     }
 
     private static object GenerateProcessArrayMethod(Type type)
